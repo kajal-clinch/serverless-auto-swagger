@@ -21,7 +21,7 @@ export default (
   }
 
   const swaggerUI: ServerlessFunction = {
-    name: stage ? `${stage}-swagger-ui` : undefined,
+    name: name && stage ? `${stage}-${name}-swagger-ui` : undefined,
     handler: handlerPath + 'swagger-html.handler',
     disableLogs: true,
     events: [
@@ -36,7 +36,7 @@ export default (
   };
 
   const swaggerJSON: ServerlessFunction = {
-    name: stage ? `${stage}-swagger-json` : undefined,
+    name: name && stage ? `${stage}-${name}-swagger-json` : undefined,
     handler: handlerPath + 'swagger-json.handler',
     disableLogs: true,
     events: [
