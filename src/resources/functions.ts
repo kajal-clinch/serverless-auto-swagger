@@ -21,7 +21,7 @@ export default (
   }
 
   const swaggerUI: ServerlessFunction = {
-    name: name && stage ? `${name}-${stage}-swagger-ui` : undefined,
+    name: stage ? `${stage}-swagger-ui` : undefined,
     handler: handlerPath + 'swagger-html.handler',
     disableLogs: true,
     events: [
@@ -36,7 +36,7 @@ export default (
   };
 
   const swaggerJSON: ServerlessFunction = {
-    name: name && stage ? `${name}-${stage}-swagger-json` : undefined,
+    name: stage ? `${stage}-swagger-json` : undefined,
     handler: handlerPath + 'swagger-json.handler',
     disableLogs: true,
     events: [
@@ -52,17 +52,17 @@ export default (
 
   const swaggerRedirectURI: ServerlessFunction | undefined = serverless.service.custom?.autoswagger?.useRedirectUI
     ? {
-        name: name && stage ? `${name}-${stage}-swagger-redirect-uri` : undefined,
-        handler: handlerPath + 'oauth2-redirect-html.handler',
-        events: [
-          {
-            [apiType as 'httpApi']: {
-              method: 'get' as const,
-              path: useStage ? `/${stage}/oauth2-redirect.html` : `/oauth2-redirect.html`,
-            },
+      name: name && stage ? `${name}-${stage}-swagger-redirect-uri` : undefined,
+      handler: handlerPath + 'oauth2-redirect-html.handler',
+      events: [
+        {
+          [apiType as 'httpApi']: {
+            method: 'get' as const,
+            path: useStage ? `/${stage}/oauth2-redirect.html` : `/oauth2-redirect.html`,
           },
-        ],
-      }
+        },
+      ],
+    }
     : undefined;
 
   return {
