@@ -1,4 +1,4 @@
-exports.handler = async () => {
+const handler = async () => {
   return {
     statusCode: 200,
     body: swaggerUI,
@@ -73,3 +73,5 @@ const swaggerUI = `<!DOCTYPE html>
   </body>
 </html>
 `;
+
+export default handler
